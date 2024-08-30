@@ -1,4 +1,6 @@
 # %%
+
+#importando as bibliotecas a serem usadas nessa 1 etapa
 import pandas as pd 
 import numpy as np 
 import os
@@ -60,3 +62,32 @@ for i in range(num_chunks):
 print(f'Dados gerados e salvos em {dir_path}')
 
 
+# %%
+##
+# Agora vamos criar um script para ler todos os arquivos CSV do diretório e combiná-los em um único DataFrame.
+# ####
+
+# Leitura e combinação dos arquivos CSV
+def combine_csv_files(diretorio):
+    arquivos_csv = [os.path.join(diretorio, f) for f in os.listdir(diretorio) if f.endswith('.csv')]
+    df = pd.concat((pd.read_csv(f) for f in arquivos_csv), ignore_index=True)
+    return df
+
+# Executa a combinação
+df_vendas = combine_csv_files(dir_path)
+
+#Print para retornar o dataframe de vendas e analisar os 5 primeiros registros
+print(df_vendas.head())
+
+# %%
+
+# Analise exploratoria dos dados
+
+#Total de vendas por Região
+vendas_por_regiao = df_vendas.groupby('Regiao')['Vendas'].sum().reset_index()
+
+#Produtos mais vendidos
+produtos_mais_vendidos = df_vendas.groupby('Produto')['Vendas'].sum().reset_index()
+
+print(vendas_por_regiao)
+print(produtos_mais_vendidos)
