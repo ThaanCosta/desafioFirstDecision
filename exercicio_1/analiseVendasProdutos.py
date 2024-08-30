@@ -91,3 +91,29 @@ produtos_mais_vendidos = df_vendas.groupby('Produto')['Vendas'].sum().reset_inde
 
 print(vendas_por_regiao)
 print(produtos_mais_vendidos)
+
+# %%
+
+#Etapa que iremos utilizar as bibliotecas Matplotlib/ Seaborn
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#grafico de vendas por região
+plt.figure(figsize=(10,6))
+sns.barplot(
+    x='Regiao',
+    y='Vendas',
+    data=vendas_por_regiao
+)
+plt.show()
+
+#grafico dos produtos mais vendidos
+plt.figure(figsize=(10,6))
+sns.barplot(
+    x='Produto',
+    y='Vendas',
+    data=produtos_mais_vendidos
+)
+plt.show()
+# %%
