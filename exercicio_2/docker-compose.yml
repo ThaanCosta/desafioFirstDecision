@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    networks:
+      - todo-net
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo_db
+    volumes:
+      - todo-data:/var/lib/postgresql/data
+    networks:
+      - todo-net
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    networks:
+      - todo-net
+
+volumes:
+  todo-data:
+
+networks:
+  todo-net:
