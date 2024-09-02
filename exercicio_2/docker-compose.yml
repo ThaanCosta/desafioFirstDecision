@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    image: exercicio_2-web
+    container_name: exercicio_2-web-1
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: exercicio_2-db-1
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "123456"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    user: root
+
+volumes:
+  sqlserver-data:
