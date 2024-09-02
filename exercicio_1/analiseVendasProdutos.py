@@ -60,3 +60,13 @@ for i in range(num_chunks):
 print(f'Dados gerados e salvos em {dir_path}')
 
 
+# Leitura e combinação dos arquivos CSV
+# Agora vamos criar um script para ler todos os arquivos CSV do diretório e combiná-los em um único DataFrame.
+def combine_csv_files(directory):
+    all_files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith('.csv')]
+    df_combined = pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
+    return df_combined
+
+# Executa a combinação
+df_vendas = combine_csv_files(dir_path)
+print(df_vendas.head())
