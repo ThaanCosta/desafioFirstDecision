@@ -98,3 +98,15 @@ sns.barplot(x='Produto', y='Vendas', data=produtos_mais_vendidos)
 plt.title('Produtos Mais Vendidos')
 plt.show()
 
+# vamos exportar os resultados da análise para um novo arquivo CSV
+# Exportando os resultados
+vendas_por_regiao.to_csv('total_vendas_por_regiao.csv', index=False)
+produtos_mais_vendidos.to_csv('produtos_mais_vendidos.csv', index=False)
+
+# Define o diretório de destino para os arquivos CSV finais
+dir_destino = 'resultados_analise'
+os.makedirs(dir_destino, exist_ok=True)  # Cria o diretório se ele não existir
+
+# Exportando os resultados para o diretório de destino
+vendas_por_regiao.to_csv(f'{dir_destino}/total_vendas_por_regiao.csv', index=False)
+produtos_mais_vendidos.to_csv(f'{dir_destino}/produtos_mais_vendidos.csv', index=False)
