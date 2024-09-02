@@ -70,3 +70,16 @@ def combine_csv_files(directory):
 # Executa a combinação
 df_vendas = combine_csv_files(dir_path)
 print(df_vendas.head())
+
+#Vamos calcular o total de vendas por região e identificar os produtos mais vendidos
+
+# Total de vendas por região
+vendas_por_regiao = df_vendas.groupby('Região')['Vendas'].sum().reset_index()
+
+# Produtos mais vendidos
+produtos_mais_vendidos = df_vendas.groupby('Produto')['Vendas'].sum().reset_index().sort_values(by='Vendas', ascending=False)
+
+print(vendas_por_regiao)
+print(produtos_mais_vendidos)
+
+
