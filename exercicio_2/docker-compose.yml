@@ -1,25 +1,24 @@
-version: '3.8'
-
+version: '3'
 services:
   web:
-    image: exercicio_2-web
-    container_name: exercicio_2-web-1
+    build: .
     ports:
       - "5000:5000"
+    volumes:
+      - .:/app
     depends_on:
       - db
 
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: exercicio_2-db-1
-    ports:
-      - "1433:1433"
+    image: mysql:8.0
+    restart: always
     environment:
-      SA_PASSWORD: "123456"
-      ACCEPT_EULA: "Y"
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
-      - sqlserver-data:/var/opt/mssql
-    user: root
+      - mysql-data:/var/lib/mysql
 
 volumes:
-  sqlserver-data:
+  mysql-data:

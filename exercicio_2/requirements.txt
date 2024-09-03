@@ -1,4 +1,1 @@
-Flask
-Flask-SQLAlchemy
-pyodbc
-SQLAlchemy
+Flask==2.3.3
